@@ -24,13 +24,13 @@ function Cart({ mini = false }) {
 
     if (mini) {
         return (
-            <aside className="hidden md:block p-6 bg-gray-100 rounded-md md:col-span-1">
+            <aside className="hidden md:block md:col-span-1">
                 {loading ? (
-                    <div className="flex items-center justify-center w-full h-full">
+                    <div className="flex items-center p-6 bg-gray-100 rounded-md justify-center w-full h-full">
                         <span className="text-gray-500">Loading...</span>
                     </div>
                 ) : (
-                    <>
+                    <div className="p-6 bg-gray-100 rounded-md">
                         <ul>
                             {cart?.items?.map((item) => (
                                 <li key={item.id} className="flex items-center mb-4 border-b border-gray-300 pb-4">
@@ -69,7 +69,7 @@ function Cart({ mini = false }) {
                                 <dd className="text-2xl">{formatPrice(cart.grandTotal)}</dd>
                             </div>
                         </dl>
-                    </>
+                    </div>
                 )}
             </aside>
         );
@@ -121,18 +121,28 @@ function Cart({ mini = false }) {
                                     </li>
                                 ))}
                             </ul>
-                            <form className="mt-6 mb-4 flex flex-wrap">
-                                <BaseInput
-                                    type="text"
-                                    label="Voucher Code"
-                                    hideLabel
-                                    placeholder="Enter voucher code"
-                                    className="bg-white w-full md:w-auto"
-                                />
-                                <AppButton isSubmit className="mt-2 w-full md:mt-0 md:ml-2 md:w-auto">
-                                    Apply Voucher
-                                </AppButton>
-                            </form>
+                            <div className="py-2">
+                                <h2 className="text-xl mb-4 font-bold">Discount or Voucher Code</h2>
+                                <form className="mt-6 mb-4 flex flex-wrap">
+                                    <BaseInput
+                                        type="text"
+                                        label="Voucher Code"
+                                        hideLabel
+                                        placeholder="Enter discount code"
+                                        className="bg-white w-full md:w-auto"
+                                    />
+                                    <AppButton isSubmit className="mt-2 w-full md:mt-0 md:ml-2 md:w-auto">
+                                        Apply Voucher
+                                    </AppButton>
+                                </form>
+                                <div className="flex items-center space-x-2">
+                                    <span className="font-semibold">CODE2005</span>
+                                    <button className="text-gray-500 hover:text-red-500 cursor-pointer"><SvgIcon name="close" /></button>
+                                </div>
+                                <p className="mt-2 text-sm text-gray-600">
+                                    This voucher gives you a 20% discount on your order.
+                                </p>
+                            </div>
                         </div>
                         <aside className="mt-4 md:mt-0 md:p-6 rounded-md">
                             <dl className="space-y-2">

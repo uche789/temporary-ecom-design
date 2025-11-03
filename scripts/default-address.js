@@ -1,7 +1,7 @@
 function DefaultAddress({ address, type, className = '', onEdit, onUse, shouldUse = true }) {
     const header = <h2 className="text-lg font-bold">Default {type === 'billing' ? 'Billing' : 'Shipping'} Address</h2>;
     return (
-        <div className={`border border-gray-300 p-4 rounded-md ${className}`}>
+        <article className={`border border-gray-300 p-4 rounded-md ${className}`}>
             {header}
             <p className="m-2">
                 {address.firstName} {address.lastName}<br />
@@ -19,6 +19,6 @@ function DefaultAddress({ address, type, className = '', onEdit, onUse, shouldUs
                 }
                 {shouldUse && <span className="text-green-600"><SvgIcon name="check" width={36} height={36} /></span>}
             </div>
-        </div>
+        </article>
     );
 }

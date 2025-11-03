@@ -99,6 +99,28 @@ const mockProducts = [
     }
 ];
 
+const mockPaymentMethods = [
+        { 
+            key: 'credit-card',
+            name: 'Credit Card',
+            description: 'Pay with your credit card.',
+            icon: 'creditcard'
+        },
+        { 
+            key: 'pay-later',
+            name: 'Pay Later',
+            description: 'Choose to pay later at your convenience.',
+            icon: 'cash'
+        },
+        { 
+            key: 'bank-transfer',
+            name: 'Bank Transfer',
+            description: 'Transfer directly from your bank account.',
+            icon: 'bank',
+            disabled: false
+        }
+    ];
+
 const hasDefaultAddress = true;
 
 const countries = Object.freeze({
@@ -142,7 +164,12 @@ const mockCustomer = {
 
 const mockCart = {
     id: 1,
-    voucher: null,
+    voucher: {
+        code: 'SUMMER21',
+        discountAmount: 10.00,
+        description: 'Summer 2021 Discount'
+    },
+    // voucher: null,
     items: [
         {
             id: 1,
@@ -171,6 +198,9 @@ const mockCart = {
             }
         }
     ],
+    billingAddress: { ...mockCustomer.defaultBillingAddress, isDefault: true },
+    shippingAddress: { ...mockCustomer.defaultShippingAddress, isDefault: true },
+    paymentMethod: mockPaymentMethods[0],
     subTotal: 59.98, // should be derived from items
     taxes: 5.99,
     shippingCost: 4.99,
