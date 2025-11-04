@@ -162,6 +162,162 @@ const mockCustomer = {
         })()
 };
 
+const mockOrders = [
+    {
+        id: 1,
+        orderNumber: 'ORD-1001',
+        timestamp: '2025-10-01:15:30:00Z',
+        canCancel: false,
+        canReturn: false,
+        status: 'shipped',
+        shippingCost: 4.99,
+        discountAmount: 9.00,
+        totalAmount: 79.97,
+        items: [
+            {
+                id: 1,
+                title: 'Product 1',
+                quantity: 2,
+                image: '../public/product/bouquet/christie-kim-0IsBu45B3T8-unsplash (1).jpg',
+                productLink: '/product/1',
+                productId: 1,
+                quantity: 2,
+                originalPrice: 29.99,
+                discounts: [
+                    {
+                        type: 'sale',
+                        amount: 5.00,
+                        description: 'Spring Sale',
+                        amountType: 'fixed'
+                    },
+                    {
+                        type: 'voucher',
+                        amount: 4.00,
+                        description: 'SUMMER21 Discount',
+                        amountType: 'percentage'
+                    }
+                ]
+            }, {
+                id: 2,
+                title: 'Product 2',
+                quantity: 1,
+                image: '../public/product/bouquet/markus-clemens-mibjbNoS1XA-unsplash (1).jpg',
+                productLink: '/product/2',
+                productId: 2,
+                originalPrice: 19.99,
+                discounts: [],
+            }
+        ],
+        tracking: {
+            trackingNumber: 'TRACK123456789',
+            trackingLink: 'https://www.trackinglink.com/track?code=ORD-1001',
+            status: 'In Transit',
+            estimatedDelivery: '2025-10-05',
+            history: [
+                { timestamp: '2025-10-02', status: 'Shipped', location: 'Origin Facility' },
+                { timestamp: '2025-10-03', status: 'In Transit', location: 'In Transit Facility' },
+            ],
+            carrier: 'FastShip'
+        }
+    },
+    {
+        id: 2,
+        orderNumber: 'ORD-1002',
+        timestamp: '2025-10-02:15:30:00Z',
+        canCancel: true,
+        canReturn: false,
+        status: 'processing',
+        shippingCost: 0,
+        discountAmount: 5.00,
+        totalAmount: 29.99,
+        items: [
+            {
+                id: 1,
+                title: 'Product 1',
+                quantity: 1,
+                image: '../public/product/bouquet/christie-kim-0IsBu45B3T8-unsplash (1).jpg',
+                productLink: '/product/1',
+                productId: 1,
+                originalPrice: 29.99,
+                discounts: []
+            }
+        ],
+        tracking: {
+            trackingNumber: 'TRACK987654321',
+            trackingLink: 'https://www.trackinglink.com/track?code=ORD-1002',
+            carrier: 'FastShip Partner'
+        }
+    },
+    {
+        id: 3,
+        orderNumber: 'ORD-1003',
+        timestamp: '2025-10-03:15:30:00Z',
+        canCancel: false,
+        canReturn: true,
+        status: 'delivered',
+        shippingCost: 0,
+        discountAmount: 0.00,
+        totalAmount: 49.99,
+        items: [
+            {
+                id: 1,
+                title: 'Product 3',
+                quantity: 1,
+                image: '../public/product/bouquet/uljana-borodina-NFj6pEUdmpY-unsplash (1).jpg',
+                productLink: '/product/3',
+                productId: 3,
+                originalPrice: 49.99,
+                discounts: []
+            }
+        ],
+        tracking: {
+            trackingLink: 'https://www.trackinglink.com/track?code=ORD-1003',
+            trackingNumber: 'TRACK123456789',
+            status: 'Delivered',
+            estimatedDelivery: '2025-10-07',
+            history: [
+                { timestamp: '2025-10-04', status: 'Out for Delivery', location: 'Local Facility' },
+                { timestamp: '2025-10-05', status: 'Delivered', location: 'Customer Address' },
+            ],
+            carrier: 'FastShip'
+        }
+    },
+    {
+        id: 4,
+        orderNumber: 'ORD-1004',
+        timestamp: '2025-10-04:15:30:00Z',
+        canCancel: false,
+        canReturn: false,
+        status: 'returned',
+        shippingCost: 4.99,
+        discountAmount: 15.00,
+        totalAmount: 119.99,
+        items: [
+            {
+                id: 1,
+                title: 'Product 4',
+                quantity: 2,
+                image: '../public/product/wedding/jessie-daniella-aiNU4cA4UzQ-unsplash.jpg',
+                productLink: '/product/4',
+                productId: 4,
+                originalPrice: 59.99,
+                discounts: [
+                    {
+                        type: 'voucher',
+                        amount: 15.00,
+                        description: 'WELCOME15 Discount',
+                        amountType: 'fixed'
+                    }
+                ]
+            }
+        ],
+        tracking: {
+            trackingLink: 'https://www.trackinglink.com/track?code=ORD-1004',
+            carrier: 'FastShip Partner'
+        }
+    }
+]
+
 const mockCart = {
     id: 1,
     voucher: {
@@ -195,7 +351,8 @@ const mockCart = {
             price: {
                 current: 19.99,
                 original: 19.99
-            }
+            },
+            discount: []
         }
     ],
     billingAddress: { ...mockCustomer.defaultBillingAddress, isDefault: true },

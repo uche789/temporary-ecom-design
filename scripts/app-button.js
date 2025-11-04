@@ -7,12 +7,14 @@ function AppButton({
     isDisabled,
     isLink,
     href,
+    bgColor = 'bg-white',
+    textColor = 'text-black',
     loading = false
 }) {
     const buttonClasses = React.useMemo(() => {
         let colorClass = isPrimary
             ? "bg-green-700 !text-white hover:bg-green-800"
-            : "bg-white border border-gray-300 !text-black hover:bg-gray-100";
+            : `${bgColor} border border-gray-300 ${textColor} hover:bg-gray-100 hover:text-black`;
 
         if (isDisabled) {
             colorClass = "bg-neutral-200 cursor-not-allowed text-neutral-400";
