@@ -1,4 +1,4 @@
-function DefaultAddress({ address, type, className = '', onEdit, onUse, shouldUse = true }) {
+function DefaultAddress({ address, type, className = '', onEdit, onCreate, onUse, shouldUse = true }) {
     const header = <h2 className="text-lg font-bold">Default {type === 'billing' ? 'Billing' : 'Shipping'} Address</h2>;
     return (
         <article className={`border border-gray-300 p-4 rounded-md ${className}`}>
@@ -12,7 +12,8 @@ function DefaultAddress({ address, type, className = '', onEdit, onUse, shouldUs
                 {
                     !shouldUse && (
                         <>
-                            <AppButton className="mr-2" onClick={onEdit}>Create new</AppButton>
+                            <AppButton className="mr-2" onClick={onCreate}>New</AppButton>
+                            <AppButton className="mr-2" onClick={onEdit}>Edit</AppButton>
                             <AppButton isPrimary onClick={onUse}>Use</AppButton>
                         </>
                     )

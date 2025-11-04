@@ -22,7 +22,7 @@ function AppButton({
         if (isLink && href) {
             colorClass += " block !no-underline text-center";
         }
-        return `${colorClass} py-2 px-4 rounded-lg font-semibold ${className}`;
+        return `${colorClass} cursor-pointer py-2 px-4 rounded-lg font-semibold ${className}`;
     }, [className, isDisabled, isPrimary]);
 
     if (isLink && href) {

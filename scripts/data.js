@@ -100,28 +100,29 @@ const mockProducts = [
 ];
 
 const mockPaymentMethods = [
-        { 
-            key: 'credit-card',
-            name: 'Credit Card',
-            description: 'Pay with your credit card.',
-            icon: 'creditcard'
-        },
-        { 
-            key: 'pay-later',
-            name: 'Pay Later',
-            description: 'Choose to pay later at your convenience.',
-            icon: 'cash'
-        },
-        { 
-            key: 'bank-transfer',
-            name: 'Bank Transfer',
-            description: 'Transfer directly from your bank account.',
-            icon: 'bank',
-            disabled: false
-        }
-    ];
+    {
+        key: 'credit-card',
+        name: 'Credit Card',
+        description: 'Pay with your credit card.',
+        icon: 'creditcard'
+    },
+    {
+        key: 'pay-later',
+        name: 'Pay Later',
+        description: 'Choose to pay later at your convenience.',
+        icon: 'cash'
+    },
+    {
+        key: 'bank-transfer',
+        name: 'Bank Transfer',
+        description: 'Transfer directly from your bank account.',
+        icon: 'bank',
+        disabled: false
+    }
+];
 
-const hasDefaultAddress = true;
+const hasDefaultBillingAddress = true;
+const hasDefaultShippingAddress = true;
 
 const countries = Object.freeze({
     ca: 'Canada',
@@ -129,37 +130,39 @@ const countries = Object.freeze({
 });
 
 const mockCustomer = {
-        id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        phone: '555-555-5555',
-        defaultShippingAddress: (() => {
-            if (!hasDefaultAddress) return null;
-            return {
-                id: 1,
-                firstName: 'John',
-                lastName: 'Doe',
-                street: '123 Main St',
-                city: 'Anytown',
-                state: 'ON',
-                postalCode: '12345',
-                country: 'ca',
-            }
-        })(),
-        defaultBillingAddress: (() => {
-            if (!hasDefaultAddress) return null;
-            return {
-                id: 2,
-                firstName: 'Jane',
-                lastName: 'Doe',
-                street: '456 Elm St',
-                city: 'Othertown',
-                state: 'Berlin',
-                postalCode: '67890',
-                country: 'de'
-            }
-        })()
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@example.com',
+    phone: '555-555-5555',
+    dob: '1990-01-01',
+    defaultShippingAddress: (() => {
+        if (!hasDefaultShippingAddress) return null;
+        return {
+            id: 1,
+            firstName: 'John',
+            lastName: 'Doe',
+            street: '123 Main St',
+            city: 'Anytown',
+            state: 'ON',
+            postalCode: '12345',
+            country: 'ca',
+        }
+    })(),
+    defaultBillingAddress: (() => {
+        if (!hasDefaultBillingAddress) return null;
+        return {
+            id: 2,
+            firstName: 'Jane',
+            lastName: 'Doe',
+            street: '456 Elm St',
+            city: 'Othertown',
+            state: 'Berlin',
+            postalCode: '67890',
+            country: 'de'
+        }
+    })(),
+    newsletterSubscribed: true
 };
 
 const mockOrders = [
@@ -173,6 +176,21 @@ const mockOrders = [
         shippingCost: 4.99,
         discountAmount: 9.00,
         totalAmount: 79.97,
+        billingAddress: {
+            name: 'John Doe',
+            address: '123 Main St',
+            city: 'Anytown',
+            postalCode: '12345',
+            country: 'Canada',
+            email: 'john.doe@example.com'
+        },
+        shippingAddress: {
+            name: 'John Doe',
+            address: '123 Main St',
+            city: 'Anytown',
+            postalCode: '12345',
+            country: 'Canada'
+        },
         items: [
             {
                 id: 1,
@@ -210,7 +228,7 @@ const mockOrders = [
         ],
         tracking: {
             trackingNumber: 'TRACK123456789',
-            trackingLink: 'https://www.trackinglink.com/track?code=ORD-1001',
+            trackingLink: 'https://www.example.com/track?code=ORD-1001',
             status: 'In Transit',
             estimatedDelivery: '2025-10-05',
             history: [
@@ -230,6 +248,21 @@ const mockOrders = [
         shippingCost: 0,
         discountAmount: 5.00,
         totalAmount: 29.99,
+        billingAddress: {
+            name: 'John Doe',
+            address: '123 Main St',
+            city: 'Anytown',
+            postalCode: '12345',
+            country: 'Canada',
+            email: 'john.doe@example.com'
+        },
+        shippingAddress: {
+            name: 'John Doe',
+            address: '123 Main St',
+            city: 'Anytown',
+            postalCode: '12345',
+            country: 'Canada'
+        },
         items: [
             {
                 id: 1,
@@ -242,11 +275,7 @@ const mockOrders = [
                 discounts: []
             }
         ],
-        tracking: {
-            trackingNumber: 'TRACK987654321',
-            trackingLink: 'https://www.trackinglink.com/track?code=ORD-1002',
-            carrier: 'FastShip Partner'
-        }
+        tracking: null
     },
     {
         id: 3,
@@ -258,6 +287,21 @@ const mockOrders = [
         shippingCost: 0,
         discountAmount: 0.00,
         totalAmount: 49.99,
+        billingAddress: {
+            name: 'John Doe',
+            address: '123 Main St',
+            city: 'Anytown',
+            postalCode: '12345',
+            country: 'Canada',
+            email: 'john.doe@example.com'
+        },
+        shippingAddress: {
+            name: 'John Doe',
+            address: '123 Main St',
+            city: 'Anytown',
+            postalCode: '12345',
+            country: 'Canada'
+        },
         items: [
             {
                 id: 1,
@@ -271,7 +315,7 @@ const mockOrders = [
             }
         ],
         tracking: {
-            trackingLink: 'https://www.trackinglink.com/track?code=ORD-1003',
+            trackingLink: 'https://www.example.com/track?code=ORD-1003',
             trackingNumber: 'TRACK123456789',
             status: 'Delivered',
             estimatedDelivery: '2025-10-07',
@@ -292,6 +336,21 @@ const mockOrders = [
         shippingCost: 4.99,
         discountAmount: 15.00,
         totalAmount: 119.99,
+        billingAddress: {
+            name: 'John Doe',
+            address: '123 Main St',
+            city: 'Anytown',
+            postalCode: '12345',
+            country: 'Canada',
+            email: 'john.doe@example.com'
+        },
+        shippingAddress: {
+            name: 'John Doe',
+            address: '123 Main St',
+            city: 'Anytown',
+            postalCode: '12345',
+            country: 'Canada'
+        },
         items: [
             {
                 id: 1,
@@ -312,7 +371,7 @@ const mockOrders = [
             }
         ],
         tracking: {
-            trackingLink: 'https://www.trackinglink.com/track?code=ORD-1004',
+            trackingLink: 'https://www.example.com/track?code=ORD-1004',
             carrier: 'FastShip Partner'
         }
     }
@@ -338,7 +397,7 @@ const mockCart = {
             price: {
                 current: 29.99,
                 original: 39.99
-            },
+            }
         },
         {
             id: 2,
@@ -351,15 +410,13 @@ const mockCart = {
             price: {
                 current: 19.99,
                 original: 19.99
-            },
-            discount: []
+            }
         }
     ],
     billingAddress: { ...mockCustomer.defaultBillingAddress, isDefault: true },
     shippingAddress: { ...mockCustomer.defaultShippingAddress, isDefault: true },
     paymentMethod: mockPaymentMethods[0],
     subTotal: 59.98, // should be derived from items
-    taxes: 5.99,
     shippingCost: 4.99,
     discount: 10.00,
     grandTotal: 59.98 // should be subtotal + tax + shipping - discount

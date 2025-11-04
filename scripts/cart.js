@@ -45,29 +45,31 @@ function Cart({ mini = false }) {
                                 </li>
                             ))}
                         </ul>
+
+                        {cart.voucher && mini && <div className="flex justify-between border-b border-gray-300 pb-4 mb-4">
+                            Voucher applied: <span className="font-semibold">{cart.voucher.code}</span>
+                        </div>}
+                        
                         <dl className="space-y-2">
                             <div className="flex justify-between">
                                 <dt className="text-lg font-semibold">Subtotal:</dt>
                                 <dd className="text-lg">{formatPrice(cart.subTotal)}</dd>
                             </div>
                             {cart.discount && (
-                                <div className="flex justify-between">
+                                <div className="flex justify-between text-green-600">
                                     <dt className="text-lg font-semibold">Discount:</dt>
-                                    <dd className="text-lg">{formatPrice(cart.discount)}</dd>
+                                    <dd className="text-lg">-{formatPrice(cart.discount)}</dd>
                                 </div>
                             )}
                             <div className="flex justify-between">
                                 <dt className="text-lg font-semibold">Shipping:</dt>
                                 <dd className="text-lg">{formatPrice(cart.shippingCost)}</dd>
                             </div>
-                            <div className="flex justify-between">
-                                <dt className="text-lg font-semibold">Taxes:</dt>
-                                <dd className="text-lg">{formatPrice(cart.taxes)}</dd>
-                            </div>
                             <div className="flex justify-between border-t border-gray-300 pt-4 mt-4">
                                 <dt className="text-2xl font-semibold">Total:</dt>
-                                <dd className="text-2xl">{formatPrice(cart.grandTotal)}</dd>
+                                <dd className="text-2xl">{formatPrice(cart.grandTotal + cart.shippingCost)}</dd>
                             </div>
+                            <p className="text-gray-600 text-sm">Includes all taxes and fees</p>
                         </dl>
                     </div>
                 )}
@@ -160,13 +162,9 @@ function Cart({ mini = false }) {
                                     <dt className="text-lg font-semibold">Shipping:</dt>
                                     <dd className="text-lg">{formatPrice(cart.shippingCost)}</dd>
                                 </div>
-                                <div className="flex justify-between">
-                                    <dt className="text-lg font-semibold">Taxes:</dt>
-                                    <dd className="text-lg">{formatPrice(cart.taxes)}</dd>
-                                </div>
                                 <div className="flex justify-between border-t border-gray-300 pt-4 mt-4">
                                     <dt className="text-2xl font-semibold">Total:</dt>
-                                    <dd className="text-2xl">{formatPrice(cart.grandTotal)}</dd>
+                                    <dd className="text-2xl">{formatPrice(cart.grandTotal + cart.shippingCost)}</dd>
                                 </div>
                             </dl>
                             <AppButton isPrimary className="mt-4 w-full">

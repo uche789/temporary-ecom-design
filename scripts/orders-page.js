@@ -43,7 +43,7 @@ function OrdersPage() {
                             <img key={index} src={imgSrc} alt={`Product ${index + 1}`} className="w-16 h-16 object-cover" />
                         ))}
                     </div>
-                    <div className="mt-4 flex flex-row space-x-8 md:text-md text-sm">
+                    <div className="mt-4 flex flex-row space-x-8 md:text-base text-sm">
                         <div className="flex flex-col">
                             <span className="font-semibold">Status</span>
                             <span className={`${getStatusTextAndColour(order.status).color}`}>{getStatusTextAndColour(order.status).text}</span>
@@ -61,10 +61,10 @@ function OrdersPage() {
                             <span className="text-gray-600">-${order.discountAmount.toFixed(2)}</span>
                         </div>
                     </div>
-                    <div className="mt-4 space-x-2 flex flex-wrap md:justify-end">
-                        <AppButton isPrimary isLink href={`?customer=&order_details=${order.id}`} className="inline-block">View Details</AppButton>
-                        {order.canCancel && <AppButton bgColor="bg-red-500" textColor="text-white">Cancel Order</AppButton>}
-                        {order.canReturn && <AppButton bgColor="bg-yellow-500" textColor="text-white">Return Order</AppButton>}
+                    <div className="mt-4 space-x-2 space-y-2 flex flex-wrap md:justify-end">
+                        <AppButton isPrimary isLink href={`?customer=&order_details=${order.id}`} className="flex h-10 items-center">View Details</AppButton>
+                        {order.canCancel && <AppButton bgColor="bg-red-500" textColor="text-white" className="h-10 items-center flex">Cancel Order</AppButton>}
+                        {order.canReturn && <AppButton bgColor="bg-yellow-500" textColor="text-white" className="h-10 items-center flex">Return Order</AppButton>}
                     </div>
                 </article>
             ))}

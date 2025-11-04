@@ -1,4 +1,4 @@
-function RegisterLogin({ type = "start" }) {
+function RegisterLogin({ type = "login" }) {
     const success = false;
     const isRegisterPage = type === "register";
     const isStartPage = type === "start";

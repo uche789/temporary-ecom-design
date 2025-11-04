@@ -8,9 +8,19 @@ function OrderDetails() {
   }, [order]);
 
   const classItemdl = "grid grid-cols-2 gap-x-4";
-  const classSection = "bg-gray-50 p-4 rounded mb-6";
+  const classSection = "bg-gray-50 p-4 rounded mb-6 min-w-32";
 
   const divider = <div className="border-t border-gray-300 my-4" />;
+
+  const OrderAddress = ({address}) => (
+    <div className="mb-4">
+      <p><strong>Name:</strong> {address.name}</p>
+      <p><strong>Address:</strong> {address.address}</p>
+      <p><strong>City:</strong> {address.city}</p>
+      <p><strong>Postal Code:</strong> {address.postalCode}</p>
+      <p><strong>Country:</strong> {address.country}</p>
+    </div>
+  );
 
   React.useEffect(() => {
     const foundOrder = mockOrders.find(o => o.id === Number(orderId));
@@ -35,7 +45,7 @@ function OrderDetails() {
       <>
         <h2 className="text-xl font-semibold mt-4 mb-2">Order Number: <span aria-hidden="true">#</span>{order.orderNumber}</h2>
         <p className="mb-4">Order date: {orderDate}</p>
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid md:grid-cols-2 gap-4 mb-4">
           <section className={`${classSection} row-span-2`}>
             <h3 className="text-lg font-semibold mb-2">Items</h3>
             {divider}
@@ -151,6 +161,16 @@ function OrderDetails() {
             ) : (
               <p>No tracking information available.</p>
             )}
+          </section>
+          <section className={classSection}>
+            <h3 className="text-lg font-semibold mb-2">Billing Information</h3>
+            {divider}
+            <OrderAddress address={order.billingAddress} />
+          </section>
+          <section className={classSection}>
+            <h3 className="text-lg font-semibold mb-2">Shipping Information</h3>
+            {divider}
+            <OrderAddress address={order.shippingAddress} />
           </section>
         </div>
       </>
