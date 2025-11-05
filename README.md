@@ -6,8 +6,7 @@ http://localhost:3000/?checkout=&summary
 
 - Drop down menu (for account)
 - Mobile checkout (sliding overview; cart icon at the top)
+- Search bar completion
 - Modal
 - Pagination
-- Search bar completion
 - (Toast) notification
-- Fix address page (order.address)

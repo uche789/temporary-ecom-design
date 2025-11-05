@@ -1,4 +1,4 @@
-function CustomerAddress({ type, hideShippingAddress = () => {}, address = null }) {
+function EditCustomerAddress({ type, onHideShippingAddress = () => {}, address = null }) {
     const [defaultAddress, setDefaultAddress] = React.useState(address?.isDefault || false);
     const [shippingSameAsBilling, setShippingSameAsBilling] = React.useState(false);
     const [defaultShippingAddress, setDefaultShippingAddress] = React.useState(false);
@@ -31,7 +31,7 @@ function CustomerAddress({ type, hideShippingAddress = () => {}, address = null 
                         onChange={(e) => {
                             setShippingSameAsBilling(e.target.checked);
                             setDefaultShippingAddress(false);
-                            // hideShippingAddress(e.target.checked);
+                            onHideShippingAddress(e.target.checked);
                         }}
                     >
                         Use billing address as shipping address
@@ -42,7 +42,6 @@ function CustomerAddress({ type, hideShippingAddress = () => {}, address = null 
                             name="shipping_same_as_billing_default"
                             checked={defaultShippingAddress}
                             onChange={(e) => {
-                                hideShippingAddress(e.target.checked);
                                 setDefaultShippingAddress(e.target.checked);
                             }}
                         >

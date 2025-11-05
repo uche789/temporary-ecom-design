@@ -6,14 +6,16 @@ function AddressPage() {
     const [editBilling, setEditBilling] = React.useState(false);
     const [createBilling, setCreateBilling] = React.useState(false);
     const [createShipping, setCreateShipping] = React.useState(false);
-    const [loading, setLoading] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
+    const [hideShipping, setHideShipping] = React.useState(false);
+    const divider = <hr className="my-6 border-t border-gray-300" />;
 
-    const orderAddress = {
+    const mockOrderAddress = {
         use: false,
         shipping: {
             firstName: 'Alice',
             lastName: 'Smith',
-            address: '456 Oak Avenue',
+            street: '456 Oak Avenue',
             city: 'Metropolis',
             state: 'NY',
             postalCode: '10001',
@@ -24,7 +26,7 @@ function AddressPage() {
         billing: {
             firstName: 'Bob',
             lastName: 'Johnson',
-            address: '789 Pine Road',
+            street: '789 Pine Road',
             city: 'Gotham',
             state: 'NJ',
             postalCode: '07097',
@@ -34,22 +36,44 @@ function AddressPage() {
         }
     }
 
+    const orderAddress = React.useMemo(() => mockOrderAddress.use ? mockOrderAddress : null, []);
+
     // switch to relying on React compiler
     const showDefaultShipping = React.useMemo(
-        () => customer && !!customer.defaultShippingAddress,
+        () => {
+            if (orderAddress?.shipping?.isDefault) {
+                return false;
+            }
+            return customer && !!customer.defaultShippingAddress
+        },
         [customer]
     );
     const showDefaultBilling = React.useMemo(
-        () => customer && !!customer.defaultBillingAddress,
+        () => {
+            if (orderAddress?.billing?.isDefault) {
+                return false;
+            }
+            return customer && !!customer.defaultBillingAddress
+        },
         [customer]
     );
 
     const billingAddress = React.useMemo(
-        () => showDefaultBilling ? { ...customer.defaultBillingAddress, isDefault: true } : null,
+        () => {
+            if (orderAddress?.billing) {
+                return orderAddress.billing;
+            }
+            return showDefaultBilling ? { ...customer.defaultBillingAddress, isDefault: true } : null
+        },
         [customer]
     );
     const shippingAddress = React.useMemo(
-        () => showDefaultShipping ? { ...customer.defaultShippingAddress, isDefault: true } : null,
+        () => {
+            if (orderAddress?.shipping) {
+                return orderAddress.shipping;
+            }
+            return showDefaultShipping ? { ...customer.defaultShippingAddress, isDefault: true } : null
+        },
         [customer]
     );
 
@@ -65,66 +89,72 @@ function AddressPage() {
     // use react-hook-form for form handling
     const submit = (event) => {
         event.preventDefault();
-        let shippingAddress = null;
-        let billingAddress = null;
+        let shippingAddressPayload = null;
+        let billingAddressPayload = null;
         if (useDefaultShipping) {
-            shippingAddress = customer.defaultShippingAddress;
+            shippingAddressPayload = customer.defaultShippingAddress;
         }
 
         if (useDefaultBilling) {
-            billingAddress = customer.defaultBillingAddress;
+            billingAddressPayload = customer.defaultBillingAddress;
         }
 
         console.log('Form submitted');
     }
 
     const hideShippingAddress = (hide) => {
-        if (hide) {
-            setEditShipping(false);
-        }
+        console.log('Hide shipping address:', hide);
+        setHideShipping(hide);
     }
 
     return (
         <form className="md:col-span-2" onSubmit={submit}>
-            {showDefaultBilling && !(editBilling || createBilling) && <DefaultAddress
-                address={customer.defaultBillingAddress}
-                onEdit={() => {
-                    setEditBilling(true);
-                    setCreateBilling(false);
-                }}
-                onCreate={() => {
-                    setCreateBilling(true);
-                    setEditBilling(false);
-                }}
-                onUse={() => setUseDefaultBilling(true)}
-                shouldUse={useDefaultBilling} />}
-            {(createBilling || editBilling) && 
-                <CustomerAddress
+            <section>
+                {showDefaultBilling && !(editBilling || createBilling) && <DisplayAddress
                     type="billing"
-                    address={editBilling ? billingAddress : undefined}
-                />
-            }
-
-            <hr className="my-4 text-transparent" />
-
-            {showDefaultShipping && !(editShipping || createShipping) && <DefaultAddress
-                address={customer.defaultShippingAddress}
-                onEdit={() => {
-                    setEditShipping(true);
-                    setCreateShipping(false);
-                }}
-                onCreate={() => {
-                    setEditShipping(false);
-                    setCreateShipping(true);
-                }}
-                onUse={() => setUseDefaultShipping(true)}
-                shouldUse={useDefaultShipping} />}
-            {(createShipping || editShipping) && 
-                <CustomerAddress
+                    address={billingAddress}
+                    onEdit={() => {
+                        setEditBilling(true);
+                        setCreateBilling(false);
+                    }}
+                    onCreate={() => {
+                        setCreateBilling(true);
+                        setEditBilling(false);
+                        setUseDefaultBilling(false);
+                    }}
+                    onUse={() => setUseDefaultBilling(true)}
+                    shouldUse={useDefaultBilling} />}
+                {(createBilling || editBilling) && 
+                    <EditCustomerAddress
+                        type="billing"
+                        address={editBilling ? billingAddress : undefined}
+                        onHideShippingAddress={hideShippingAddress}
+                    />
+                }
+            </section>
+            <section className={hideShipping ? 'hidden' : ''}>
+                {divider}
+                {showDefaultShipping && !(editShipping || createShipping) && <DisplayAddress
                     type="shipping"
-                    address={editShipping ? shippingAddress : undefined}
-                />
-            }
+                    address={shippingAddress}
+                    onEdit={() => {
+                        setEditShipping(true);
+                        setCreateShipping(false);
+                    }}
+                    onCreate={() => {
+                        setEditShipping(false);
+                        setCreateShipping(true);
+                        setUseDefaultShipping(false);
+                    }}
+                    onUse={() => setUseDefaultShipping(true)}
+                    shouldUse={useDefaultShipping} />}
+                {(createShipping || editShipping) && 
+                    <EditCustomerAddress
+                        type="shipping"
+                        address={editShipping ? shippingAddress : undefined}
+                    />
+                }
+            </section>
             <div className="flex justify-center items-center mt-6 p-6 border border-gray-200 rounded-md">
                 <AppButton isPrimary isSubmit loading={loading} className="w-full md:max-w-2/3">
                     Continue to Payment

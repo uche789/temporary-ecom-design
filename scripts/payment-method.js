@@ -1,10 +1,9 @@
 function PaymentMethod({paymentMethod, selected = false, handleSelect = () => {}}) {
     const classDisabled = paymentMethod.disabled ? 'opacity-50 cursor-not-allowed' : '';
     const classSelected = selected && !paymentMethod.disabled ? 'bg-green-800 text-white' : '';
-    const hover = paymentMethod.disabled && !selected ? '' : 'hover:bg-gray-100 hover:text-black cursor-pointer';
     return (
         <div 
-            className={`border border-gray-500 p-4 rounded-md shadow-sm flex mb-4 ${classSelected} ${classDisabled} ${hover}`}
+            className={`border border-gray-500 p-4 cursor-pointer rounded-md shadow-sm flex mb-4 ${classSelected} ${classDisabled}`}
             aria-selected={selected}
             role="option"
             aria-label={paymentMethod.name}

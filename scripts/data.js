@@ -125,8 +125,8 @@ const hasDefaultBillingAddress = true;
 const hasDefaultShippingAddress = true;
 
 const countries = Object.freeze({
-    ca: 'Canada',
-    de: 'Germany',
+    Canada: 'Canada',
+    Germany: 'Germany',
 });
 
 const mockCustomer = {
@@ -146,7 +146,7 @@ const mockCustomer = {
             city: 'Anytown',
             state: 'ON',
             postalCode: '12345',
-            country: 'ca',
+            country: countries.Canada,
         }
     })(),
     defaultBillingAddress: (() => {
@@ -159,7 +159,7 @@ const mockCustomer = {
             city: 'Othertown',
             state: 'Berlin',
             postalCode: '67890',
-            country: 'de'
+            country: countries.Germany,
         }
     })(),
     newsletterSubscribed: true
