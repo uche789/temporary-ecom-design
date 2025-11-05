@@ -68,6 +68,12 @@ function OrdersPage() {
                     </div>
                 </article>
             ))}
+            {modifiedOrders.length === 0 && (
+                <p>You have no orders yet.</p>
+            )}
+            {modifiedOrders.length > 0 && (
+                <Pagination currentPage={87} totalPages={100} onPageChange={(page) => console.log(page)} />
+            )}
         </>
     );
 }

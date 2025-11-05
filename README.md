@@ -8,5 +8,4 @@ http://localhost:3000/?checkout=&summary
 - Mobile checkout (sliding overview; cart icon at the top)
 - Search bar completion
 - Modal
-- Pagination
 - (Toast) notification
