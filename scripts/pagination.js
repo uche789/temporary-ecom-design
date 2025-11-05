@@ -1,6 +1,17 @@
 function Pagination({ currentPage, totalPages, onPageChange }) {
+    const isMobile = useIsMobile();
+    const [maxPagesToShow, setMaxPagesToShow] = React.useState(8);
+
+    React.useEffect(() => {
+        if (isMobile) {
+            setMaxPagesToShow(1);
+        } else {
+            setMaxPagesToShow(8);
+        }
+    }, [isMobile]);
+
     const pages = [];
-    for (let i = currentPage; i <= currentPage + 10; i++) {
+    for (let i = currentPage; i <= currentPage + maxPagesToShow; i++) {
         if (i > totalPages) break;
         if (i == 1 || i == totalPages) continue;
         pages.push(i);
@@ -25,7 +36,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
                 className={`px-3 py-2 border border-gray-700 text-gray-400 hover:bg-gray-100`}
                 disabled={currentPage === 1}
             >
-                Prev
+                &lt;
             </button>
         </li>
     );
@@ -37,7 +48,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
                 className={`px-3 py-2 border border-gray-700 text-gray-400 hover:bg-gray-100`}
                 disabled={currentPage === totalPages}
             >
-                Next
+                &gt;
             </button>
         </li>
     );
@@ -57,7 +68,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
                 {
                     pages.map(page => liEl(page))
                 }
-                {totalPages - currentPage > 10 && ellipsisEl}
+                {totalPages - currentPage > maxPagesToShow && ellipsisEl}
                 {liEl(totalPages)}
                 {currentPage < totalPages && nextEl}
             </ul>
