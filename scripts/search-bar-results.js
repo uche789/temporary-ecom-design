@@ -7,7 +7,6 @@ function SearchBarResults({ suggestions = [], query, onSuggestionClick = () => {
     const [activeIndex, setActiveIndex] = React.useState(-1);
 
     function handleSuggestionClick(label) {
-        console.log('Suggestion clicked:', label);
         if (typeof onSuggestionClick === 'function') {
             onSuggestionClick(label);
         }

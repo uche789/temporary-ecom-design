@@ -1,4 +1,5 @@
 function AppHeader() {
+    const isMobile = useIsMobile();
     const [searchQuery, setSearchQuery] = React.useState("");
     const [searchSuggestions, setSearchSuggestions] = React.useState([]);
     const searchClassName = "bg-white text-black rounded-full";
@@ -32,6 +33,20 @@ function AppHeader() {
         }
     };
 
+    React.useEffect(() => {
+        if (searchSuggestions.length > 0 && isMobile) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [searchSuggestions]);
+
+    const onSuggestionClick = (label) => {
+        console.log('Suggestion clicked:', label);
+        setSearchQuery('');
+        setSearchSuggestions([]);
+    };
+
     const SearchBarComponentSnippet = (
         <>
             <div aria-owns="search-bar-content">
@@ -46,8 +61,8 @@ function AppHeader() {
                     classInputField={searchClassName}
                 />
             </div>
-            {searchSuggestions.length > 0 && <div id="search-bar-content" className="bg-white absolute md:shadow-md md:rounded-md z-50 w-full mt-1 h-full md:h-auto">
-                <SearchBarResults suggestions={searchSuggestions} query={searchQuery} />
+            {searchSuggestions.length > 0 && <div id="search-bar-content" className="bg-white absolute md:shadow-md md:rounded-md z-50 w-screen md:w-full left-0 md:left-auto mt-1 h-full md:h-auto">
+                <SearchBarResults suggestions={searchSuggestions} query={searchQuery} onSuggestionClick={onSuggestionClick} />
             </div>}
         </>
     )
