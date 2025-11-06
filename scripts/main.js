@@ -40,6 +40,7 @@ function MainContent() {
                         />
                     )}
                 </div>
+                <AlertNotification message="This is a success alert notification!" closeable={true} onClose={() => alert('Alert closed!')} />
                 <SampleNotifications />
             </div>
         </main>

@@ -22,6 +22,18 @@ window.dispatchEvent(
     detail: { title: 'Warning', message: 'Storage space running low.', type: 'warning', duration: 20000, closeable: true },
   })
 );
+
+window.dispatchEvent(
+  new CustomEvent('new-notification', {
+    detail: { title: 'Notice', message: 'This is a non-closeable notification.', type: 'info', duration: 10000, closeable: false },
+  })
+);
+
+window.dispatchEvent(
+  new CustomEvent('new-notification', {
+    detail: { title: 'Alert', message: 'This is a closeable notification (extra).', type: 'warning', duration: 8000, closeable: true },
+  })
+);
 */
 
 function SampleNotifications() {

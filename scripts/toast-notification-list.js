@@ -1,14 +1,32 @@
 function ToastNotificationList() {
     const [notifications, setNotifications] = React.useState([]);
+    const [queue, setQueue] = React.useState([]);
+
+    const createAndSetNotification = (notification) => {
+        const id = Date.now() + Math.random().toString(36).substring(2, 9);
+        const newNotification = { ...notification, id };
+        setNotifications((prevNotifications) => [
+            newNotification,
+            ...prevNotifications,
+        ]);
+    }
+
+    React.useEffect(() => {
+        if (notifications.length < 5 && queue.length > 0) {
+            setQueue((prevQueue) => {
+                const [nextNotification, ...restQueue] = prevQueue;
+                
+                if (nextNotification) {
+                    createAndSetNotification(nextNotification);
+                }
+                return restQueue;
+            });
+        }
+    }, [notifications, queue]);
 
     React.useEffect(() => {
         function handleNewNotification(event) {
-            const id = Date.now() + Math.random().toString(36).substring(2, 9);
-            const newNotification = { ...event.detail, id };
-            setNotifications((prevNotifications) => [
-                ...prevNotifications,
-                newNotification,
-            ]);
+            setQueue((prevQueue) => [...prevQueue, event.detail]);
         }
 
         window.addEventListener('new-notification', handleNewNotification);
