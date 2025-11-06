@@ -443,3 +443,18 @@ const mockSearchSuggestions = [
     { id: 4, label: 'Snake Plant Varieties' },
     { id: 5, label: 'Snake Plant Propagation' },
 ];
+
+const customerAccountMenu = [
+    {
+        label: 'Profile',
+        href: '#customer&profile'
+    },
+    {
+        label: 'Orders',
+        href: '#customer&orders'
+    },
+    {
+        label: 'Logout',
+        event: 'logout'
+    }
+]
