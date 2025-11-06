@@ -7,5 +7,4 @@ http://localhost:3000/?checkout=&summary
 - Drop down menu (for account)
 - Mobile checkout (sliding overview; cart icon at the top)
 - Search bar completion
-- Modal
 - (Toast) notification

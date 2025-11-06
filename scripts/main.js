@@ -16,11 +16,22 @@ function MainContent() {
         );
     }
 
+    const [showModal, setShowModal] = React.useState(false);
+
     return (
         <main className="px-4 py-8 bg-white min-h-96">
             <div className="max-w-7xl mx-auto">
                 {/* router comes here -- */}
                 {displayPage}
+                <AppButton onClick={() => setShowModal(true)}>Open Modal</AppButton>
+                {showModal && (
+                    <ModalWindow
+                        onClose={() => setShowModal(false)}
+                        header="Modal Header"
+                        main={mockModalContent}
+                        footer="This is the modal footer"
+                    />
+                )}
             </div>
         </main>
     );
