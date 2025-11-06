@@ -22,16 +22,25 @@ function MainContent() {
         <main className="px-4 py-8 bg-white min-h-96">
             <div className="max-w-7xl mx-auto">
                 {/* router comes here -- */}
+                <div className="space-y-4">
+                    <ToastNotificationList />
+                </div>
+
+
+                {/* Delete everything below this */}
                 {displayPage}
-                <AppButton onClick={() => setShowModal(true)}>Open Modal</AppButton>
-                {showModal && (
-                    <ModalWindow
-                        onClose={() => setShowModal(false)}
-                        header="Modal Header"
-                        main={mockModalContent}
-                        footer="This is the modal footer"
-                    />
-                )}
+                <div className="mt-4">
+                    <AppButton onClick={() => setShowModal(true)}>Open Modal</AppButton>
+                    {showModal && (
+                        <ModalWindow
+                            onClose={() => setShowModal(false)}
+                            header="Modal Header"
+                            main={mockModalContent}
+                            footer="This is the modal footer"
+                        />
+                    )}
+                </div>
+                <SampleNotifications />
             </div>
         </main>
     );
