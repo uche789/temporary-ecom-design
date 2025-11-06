@@ -26,7 +26,7 @@ function ToastNotification({ id, type = 'info', message = '', duration = 3000, c
 
     return (
         <div
-            className={`relative p-4 border-l-4 rounded shadow-md transition-all duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'} ${typeClasses[type] || typeClasses.info}`}
+            className={`relative p-4 border-l-4 md:rounded shadow-md transition-all duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'} ${typeClasses[type] || typeClasses.info}`}
         >
             {closeable && (
                 <button
