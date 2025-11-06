@@ -452,9 +452,5 @@ const customerAccountMenu = [
     {
         label: 'Orders',
         href: '#customer&orders'
-    },
-    {
-        label: 'Logout',
-        event: 'logout'
     }
 ]

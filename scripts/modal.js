@@ -86,8 +86,5 @@ function ModalWindow ({
         </>
     );
 
-    //   return createPortal(modalContent, document.body);
-    return modalContent;
+    return ReactDOM.createPortal(modalContent, document.body);
 };
-
-// export default ModalWindow;

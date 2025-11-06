@@ -6,20 +6,35 @@ function AppHeader() {
     const navLinks = [
         {
             icon: <SvgIcon name="user" />,
-            label: "Account",
+            label: "account",
+            description: "My Account",
             href: "/account"
         },
         {
             icon: <SvgIcon name="favourite" />,
-            label: "Wishlist",
+            label: "wishlist",
+            description: "My Wishlist",
             href: "/wishlist"
         },
         {
             icon: <SvgIcon name="shopping-bag" />,
-            label: "Cart",
+            label: "cart",
+            description: "Cart",
             href: "/cart"
         }
     ]
+
+    const accountLinks = [
+        {
+            label: 'Profile',
+            href: '#customer&profile' // Edited line
+        },
+        {
+            label: 'Orders',
+            href: '#customer&orders' // Edited line
+        }
+    ]
+
     const handleSearchChange = (event) => {
         const query = event.target.value;
         setSearchQuery(query);
@@ -67,6 +82,10 @@ function AppHeader() {
         </>
     )
 
+    const AccountMenuComponent = (
+        isMobile ? <MobileAccountMenu menuOptions={accountLinks} open={false} /> : <DesktopAccountMenu menuOptions={accountLinks} customer={mockCustomer} open={false} />
+    )
+
     return (
         <header className="bg-green-700 text-white">
             <div className="p-4 max-w-7xl mx-auto flex justify-between items-center">
@@ -78,13 +97,30 @@ function AppHeader() {
                     {SearchBarComponentSnippet}
                 </div>
                 <nav>
-                    <ul className="flex space-x-4">
+                    <div className="flex space-x-4">
                         {navLinks.map(link => (
-                            <li key={link.label}>
-                                <a href={link.href}>{link.icon}</a>
-                            </li>
+                            link.label === 'Account' ? (
+                                <button 
+                                    type="button" 
+                                    aria-haspopup="true" 
+                                    aria-expanded="false" 
+                                    id="account-menu-button" 
+                                    key={link.label}
+                                >
+n                                    <span className="sr-only">{link.description}</span>
+                                    <SvgIcon name="account" />
+                                    <div>
+                                        {AccountMenuComponent}
+                                    </div>
+                                </button>
+                            ) : (
+                                <a href={link.href} key={link.label}>
+                                    {link.icon}
+                                    <span className="sr-only">{link.description}</span>
+                                </a>
+                            )
                         ))}
-                    </ul>
+                    </div>
                 </nav>
             </div>
             <div className="md:hidden p-4">
