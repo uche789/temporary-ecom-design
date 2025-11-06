@@ -435,3 +435,11 @@ Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
 
 Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. Nullam mauris orci, aliquet et, iaculis et, viverra vitae, ligula. Nulla ut felis in purus aliquam imperdiet. Maecenas aliquet mollis lectus. Vivamus consectetuer risus et tortor. 
 `;
+
+const mockSearchSuggestions = [
+    { id: 1, label: 'Snake Plant' },
+    { id: 2, label: 'Snake Plant Care' },
+    { id: 3, label: 'Snake Plant Benefits' },
+    { id: 4, label: 'Snake Plant Varieties' },
+    { id: 5, label: 'Snake Plant Propagation' },
+];
