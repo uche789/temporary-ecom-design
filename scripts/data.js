@@ -454,3 +454,37 @@ const customerAccountMenu = [
         href: '#customer&orders'
     }
 ]
+
+const navLinks = [
+    {
+        icon: 'user',
+        label: "account",
+        description: "My Account",
+        href: "/account"
+    },
+    {
+        icon: 'favourite',
+        label: "wishlist",
+        description: "My Wishlist",
+        href: "/wishlist"
+    },
+    {
+        icon: 'shopping-bag',
+        label: "cart",
+        description: "Cart",
+        href: "/cart"
+    }
+]
+
+const accountLinks = [
+    {
+        label: 'Profile',
+        // href: '/profile',
+        href: '?customer&profile' // Edited line
+    },
+    {
+        label: 'Orders',
+        // href: '/orders',
+        href: '?customer&orders' // Edited line
+    }
+]

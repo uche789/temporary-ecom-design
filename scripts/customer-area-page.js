@@ -1,4 +1,5 @@
 function CustomerAreaPage() {
+    const isMobile = useIsMobile();
     const orders = window.location.search.includes('orders');
     const orderDetails = window.location.search.includes('order_details');
     const guestOrder = window.location.search.includes('guest_order');
@@ -13,6 +14,7 @@ function CustomerAreaPage() {
     }
 
     return <>
+        {isMobile && <MobileCustomerAreaNav />}
         {displayPage}
     </>;
 }
