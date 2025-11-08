@@ -1,4 +1,4 @@
-function DesktopAccountMenu({ menuOptions, customer = null, open }) {
+function DesktopAccountMenu({ customer = null, open }) {
     const customerName = React.useMemo(() => `${customer?.firstName} ${customer?.lastName}`, [customer]);
     return (
         <div
@@ -11,8 +11,11 @@ function DesktopAccountMenu({ menuOptions, customer = null, open }) {
                 {customer && <button type="button" className="underline text-gray-600 hover:no-underline">Sign out</button>}
                 {!customer && <a href="/login" className="underline text-gray-600 hover:no-underline">Sign in</a>}
             </div>
-            {menuOptions.map(option => (
-                <a key={option.label} href={option.href} className="block px-4 py-2 hover:bg-gray-100 border-b border-gray-200">{option.label}</a>
+            {accountLinks.map(option => (
+                <a key={option.label} href={option.href} className="flex px-4 py-2 hover:bg-gray-100 border-b border-gray-200">
+                    <span className="mr-1"><SvgIcon name={option.icon} aria-hidden="true" /></span>
+                    {option.label}
+                </a>
             ))}
         </div>
     );

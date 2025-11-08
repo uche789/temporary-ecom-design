@@ -1,17 +1,23 @@
 function CategoryHeader({ categories }) {
     const [activeCategory, setActiveCategory] = React.useState(null);
 
-    // max-w-7xl mx-auto
+    const handleMouseLeave = () => {
+        setActiveCategory(null);
+    };
+
     return (
-        <div id="category-header" className="relative pb-4 px-4 font-semibold text-center text-sm">
+        <div 
+            id="category-header" 
+            className="relative pb-4 px-4 font-semibold text-center text-sm"
+            onMouseLeave={handleMouseLeave}
+        >
             <div id="main-categories" className="flex space-x-6 max-w-7xl mx-auto">
                 {categories.map((category) => (
                     <a
                         className="block rounded-lg hover:bg-green-800 px-2 py-2"
-                        key={category.label}
+                        key={category.key}
                         href={category.href}
                         onMouseEnter={() => setActiveCategory(category)}
-                        onMouseLeave={() => setActiveCategory(null)}
                     >
                         {category.label}
                     </a>
@@ -23,7 +29,7 @@ function CategoryHeader({ categories }) {
                         {activeCategory.children.map((subcategory) => (
                             <a
                                 className="block rounded-lg hover:bg-green-800 px-2 py-2"
-                                key={subcategory.label}
+                                key={subcategory.key}
                                 href={subcategory.href}
                             >
                                 {subcategory.label}

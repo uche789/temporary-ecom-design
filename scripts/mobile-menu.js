@@ -1,5 +1,8 @@
-function MobileMenu({ menuOptions, open = false, customer, logout = () => {}, onClose = () => {} }) {
+function MobileMenu({ open = false, customer, logout = () => {}, onClose = () => {} }) {
     const customerName = React.useMemo(() => `${customer?.firstName} ${customer?.lastName}`, [customer]);
+
+    const linkClass = "block rounded-lg hover:bg-green-800 hover:text-white px-2 py-2";
+
     const menu = (
         <>
             {open && <div className="fixed inset-0 w-screen h-screen bg-black opacity-40" />}
@@ -20,18 +23,40 @@ function MobileMenu({ menuOptions, open = false, customer, logout = () => {}, on
                         <SvgIcon name="close" />
                     </button>
                 </div>
-                <nav className="flex flex-col p-4 space-y-4">
-                    {menuOptions.map(option => (
-                        <a key={option.label} href={option.href}>
-                            <div className="">{option.label}</div>
-                        </a>
-                    ))}
-                </nav>
-                {!!customer && (
-                    <div className="">
-                        <button type="button" className="">Logout</button>
+                <nav className="flex flex-col p-4 space-y-4 overflow-y-auto h-full">
+                    <div id="account-links">
+                        {customer && accountLinks.map(option => (
+                            <a key={option.label} href={option.href} className={`${linkClass} flex items-center`}>
+                                <span className="mr-1"><SvgIcon name={option.icon} aria-hidden="true" /></span>
+                                {option.label}
+                            </a>
+                        ))}
                     </div>
-                )}
+                    <div className={`${customer ? 'border-t border-gray-300 pt-4' : ''}`}>
+                        {categories.map(category => (
+                            <div key={category.key}>
+                                <a
+                                    key={category.label}
+                                    className={`${linkClass} font-semibold`}
+                                >
+                                    {category.label}
+                                </a>
+                                {category.children && (
+                                    <div className="pl-4 mt-2">
+                                        {category.children.map(subcategory => (
+                                            <a
+                                                key={subcategory.key}
+                                                className={linkClass}
+                                            >
+                                                {subcategory.label}
+                                            </a>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </nav>
             </div>
         </>
     );

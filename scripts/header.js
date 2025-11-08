@@ -7,7 +7,7 @@ function AppHeader() {
     const [accountMenuOpen, setAccountMenuOpen] = React.useState(false);
     const accountMenuButtonRef = React.useRef(null);
     const accountMenuRef = React.useRef(null);
-    const [customer] = React.useState(null);
+    const [customer] = React.useState(mockCustomer); // Replace with actual customer state
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
     const handleSearchChange = (event) => {
@@ -30,12 +30,12 @@ function AppHeader() {
     }, [isMobile]);
 
     React.useEffect(() => {
-        if (searchSuggestions.length > 0 && isMobile) {
+        if (mobileMenuOpen || (searchSuggestions.length > 0 && isMobile)) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
         }
-    }, [searchSuggestions]);
+    }, [searchSuggestions, mobileMenuOpen]);
 
     React.useEffect(() => {
         function handleClickOutside(event) {
@@ -178,7 +178,7 @@ function AppHeader() {
                                                 }
                                             }}
                                         >
-                                            <DesktopAccountMenu menuOptions={accountLinks} customer={customer} open={false} />
+                                            <DesktopAccountMenu customer={customer} open={false} />
                                         </div>
                                     )}
                                 </div>
