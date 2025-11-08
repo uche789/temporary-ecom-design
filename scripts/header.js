@@ -8,6 +8,7 @@ function AppHeader() {
     const accountMenuButtonRef = React.useRef(null);
     const accountMenuRef = React.useRef(null);
     const [customer] = React.useState(null);
+    const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
     const handleSearchChange = (event) => {
         const query = event.target.value;
@@ -115,7 +116,11 @@ function AppHeader() {
     return (
         <header className="bg-green-700 text-white">
             <div className="p-4 max-w-7xl mx-auto flex justify-between items-center">
-                <button type="button" className="md:hidden">
+                <button 
+                    type="button"
+                    className="md:hidden"
+                    onClick={() => setMobileMenuOpen(true)}
+                >
                     <SvgIcon name="menu" />
                 </button>
                 <div id="logo" className="font-bold text-xl flex items-center"><SvgIcon name="plant" /> foliage24</div>
@@ -188,11 +193,25 @@ function AppHeader() {
                     </div>
                 </nav>
             </div>
+            {!isMobile && <CategoryHeader categories={categories} />}
             {/* Search Bar for mobile */}
             <div className="md:hidden p-4">
                 {SearchBarComponentSnippet(null)}
             </div>
             {/* End: Search Bar for mobile */}
+
+            {isMobile && (
+                <MobileMenu
+                    menuOptions={accountLinks}
+                    open={mobileMenuOpen}
+                    customer={customer}
+                    onClose={() => setMobileMenuOpen(false)}
+                    logout={() => {
+                        console.log('Logout clicked');
+                        setMobileMenuOpen(false);
+                    }}
+                />
+            )}
         </header>
     );
 }

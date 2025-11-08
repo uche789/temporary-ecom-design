@@ -488,3 +488,89 @@ const accountLinks = [
         href: '?customer&orders' // Edited line
     }
 ]
+
+const categories = [
+    {
+        label: 'Bouquets & Gifts',
+        href: '/category/bouquets-gifts',
+        children: [
+            {
+                label: 'All Bouquets',
+                href: '/category/all-bouquets',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Wedding Bouquets',
+                href: '/category/wedding-bouquets',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Birthday Bouquets',
+                href: '/category/birthday-bouquets',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Roses',
+                href: '/category/roses-bouquets',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Seasonal Bouquets',
+                href: '/category/seasonal-bouquets',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Gift Sets',
+                href: '/category/gift-sets',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            }
+        ]
+    },
+    {
+        label: 'Flowers',
+        href: '/category/flower-arrangements',
+        children: [
+            {
+                label: 'Fresh Flowers',
+                href: '/category/fresh-flowers',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Dried Flowers',
+                href: '/category/dried-flowers',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Flower Subscriptions',
+                href: '/category/flower-subscriptions',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            }
+        ]
+    },
+    {
+        label: 'Indoor & Garden',
+        href: '/category/indoor-garden-plants',
+        children: [
+            {
+                label: 'Indoor Plants',
+                href: '/category/indoor-plants',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Garden Plants',
+                href: '/category/garden-plants',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Planters & Pots',
+                href: '/category/planters-pots',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            },
+            {
+                label: 'Vases',
+                href: '/category/vases',
+                image: '../public/product/wedding/jessie-daniella-QLuleNy8LMM-unsplash.jpg',
+            }
+        ]
+    }
+]
